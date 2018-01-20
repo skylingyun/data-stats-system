@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ybz.dao.SysTenantMapper" >
+  <resultMap id="BaseResultMap" type="com.ybz.entity.SysTenant" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR" />
+    <result column="tenant_code" property="tenantCode" jdbcType="VARCHAR" />
+    <result column="tenant_address" property="tenantAddress" jdbcType="VARCHAR" />
+    <result column="tenant_tel" property="tenantTel" jdbcType="VARCHAR" />
+    <result column="tenant_email" property="tenantEmail" jdbcType="VARCHAR" />
+    <result column="tenant_fullname" property="tenantFullname" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ts" property="ts" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_id, tenant_name, tenant_code, tenant_address, tenant_tel, tenant_email, 
+    tenant_fullname, create_time, ts
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ybz.entity.SysTenantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_tenant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tenant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_tenant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybz.entity.SysTenantExample" >
+    delete from sys_tenant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybz.entity.SysTenant" >
+    insert into sys_tenant (id, tenant_id, tenant_name, 
+      tenant_code, tenant_address, tenant_tel, 
+      tenant_email, tenant_fullname, create_time, 
+      ts)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{tenantName,jdbcType=VARCHAR}, 
+      #{tenantCode,jdbcType=VARCHAR}, #{tenantAddress,jdbcType=VARCHAR}, #{tenantTel,jdbcType=VARCHAR}, 
+      #{tenantEmail,jdbcType=VARCHAR}, #{tenantFullname,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybz.entity.SysTenant" >
+    insert into sys_tenant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="tenantName != null" >
+        tenant_name,
+      </if>
+      <if test="tenantCode != null" >
+        tenant_code,
+      </if>
+      <if test="tenantAddress != null" >
+        tenant_address,
+      </if>
+      <if test="tenantTel != null" >
+        tenant_tel,
+      </if>
+      <if test="tenantEmail != null" >
+        tenant_email,
+      </if>
+      <if test="tenantFullname != null" >
+        tenant_fullname,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ts != null" >
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantCode != null" >
+        #{tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantAddress != null" >
+        #{tenantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantTel != null" >
+        #{tenantTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantEmail != null" >
+        #{tenantEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantFullname != null" >
+        #{tenantFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybz.entity.SysTenantExample" resultType="java.lang.Integer" >
+    select count(*) from sys_tenant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_tenant
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantName != null" >
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantCode != null" >
+        tenant_code = #{record.tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantAddress != null" >
+        tenant_address = #{record.tenantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantTel != null" >
+        tenant_tel = #{record.tenantTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantEmail != null" >
+        tenant_email = #{record.tenantEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantFullname != null" >
+        tenant_fullname = #{record.tenantFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ts != null" >
+        ts = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_tenant
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      tenant_code = #{record.tenantCode,jdbcType=VARCHAR},
+      tenant_address = #{record.tenantAddress,jdbcType=VARCHAR},
+      tenant_tel = #{record.tenantTel,jdbcType=VARCHAR},
+      tenant_email = #{record.tenantEmail,jdbcType=VARCHAR},
+      tenant_fullname = #{record.tenantFullname,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      ts = #{record.ts,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybz.entity.SysTenant" >
+    update sys_tenant
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        tenant_name = #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantCode != null" >
+        tenant_code = #{tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantAddress != null" >
+        tenant_address = #{tenantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantTel != null" >
+        tenant_tel = #{tenantTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantEmail != null" >
+        tenant_email = #{tenantEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantFullname != null" >
+        tenant_fullname = #{tenantFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybz.entity.SysTenant" >
+    update sys_tenant
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      tenant_code = #{tenantCode,jdbcType=VARCHAR},
+      tenant_address = #{tenantAddress,jdbcType=VARCHAR},
+      tenant_tel = #{tenantTel,jdbcType=VARCHAR},
+      tenant_email = #{tenantEmail,jdbcType=VARCHAR},
+      tenant_fullname = #{tenantFullname,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

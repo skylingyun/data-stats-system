@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ybz.dao.TenantUserRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.ybz.entity.TenantUserRelation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="ts" property="ts" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mobile, tenant_id, tenant_name, dept_name, company, ts
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ybz.entity.TenantUserRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pub_tenant_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null and pageSize != null and pageSize != 0">
+      limit #{startRow},#{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pub_tenant_user_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pub_tenant_user_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybz.entity.TenantUserRelationExample" >
+    delete from pub_tenant_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybz.entity.TenantUserRelation" >
+    insert into pub_tenant_user_relation (id, mobile, tenant_id, 
+      tenant_name, dept_name, company, 
+      ts)
+    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
+      #{tenantName,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybz.entity.TenantUserRelation" >
+    insert into pub_tenant_user_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="tenantName != null" >
+        tenant_name,
+      </if>
+      <if test="deptName != null" >
+        dept_name,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="ts != null" >
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybz.entity.TenantUserRelationExample" resultType="java.lang.Integer" >
+    select count(*) from pub_tenant_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pub_tenant_user_relation
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantName != null" >
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        dept_name = #{record.deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ts != null" >
+        ts = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pub_tenant_user_relation
+    set id = #{record.id,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      dept_name = #{record.deptName,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      ts = #{record.ts,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybz.entity.TenantUserRelation" >
+    update pub_tenant_user_relation
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        tenant_name = #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybz.entity.TenantUserRelation" >
+    update pub_tenant_user_relation
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into pub_tenant_user_relation ( id, mobile, tenant_id,
+    tenant_name, dept_name, company,
+    ts)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      <trim prefix=" (" suffix=")" suffixOverrides="," >
+        #{item.id,jdbcType=INTEGER}, #{item.mobile,jdbcType=VARCHAR},
+        #{item.tenantId,jdbcType=VARCHAR}, #{item.tenantName,jdbcType=VARCHAR},
+        #{item.deptName,jdbcType=VARCHAR},
+        #{item.company,jdbcType=VARCHAR}, #{item.ts,jdbcType=TIMESTAMP}
+      </trim>
+    </foreach>
+  </insert>
+</mapper>

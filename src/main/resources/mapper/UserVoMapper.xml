@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ybz.dao.UserVoMapper" >
+  <resultMap id="BaseResultMap" type="com.ybz.entity.UserVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="user_avator" property="userAvator" jdbcType="VARCHAR" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="need_merge" property="needMerge" jdbcType="VARCHAR" />
+    <result column="verified" property="verified" jdbcType="VARCHAR" />
+    <result column="validate_email" property="validateEmail" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="sys_id" property="sysId" jdbcType="VARCHAR" />
+    <result column="register_date" property="registerDate" jdbcType="VARCHAR" />
+    <result column="user_activate" property="userActivate" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="login_ts" property="loginTs" jdbcType="VARCHAR" />
+    <result column="para1" property="para1" jdbcType="VARCHAR" />
+    <result column="para2" property="para2" jdbcType="VARCHAR" />
+    <result column="para3" property="para3" jdbcType="VARCHAR" />
+    <result column="para4" property="para4" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, tenant_id, user_name, user_email, user_code, user_avator, user_mobile, 
+    need_merge, verified, validate_email, user_password, sys_id, register_date, user_activate, 
+    type_id, login_ts, para1, para2, para3, para4, source
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ybz.entity.UserVoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_vo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_vo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_vo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybz.entity.UserVoExample" >
+    delete from user_vo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybz.entity.UserVo" >
+    insert into user_vo (id, user_id, tenant_id, 
+      user_name, user_email, user_code, 
+      user_avator, user_mobile, need_merge, 
+      verified, validate_email, user_password, 
+      sys_id, register_date, user_activate, 
+      type_id, login_ts, para1, 
+      para2, para3, para4, 
+      source)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{userAvator,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{needMerge,jdbcType=VARCHAR}, 
+      #{verified,jdbcType=VARCHAR}, #{validateEmail,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{sysId,jdbcType=VARCHAR}, #{registerDate,jdbcType=VARCHAR}, #{userActivate,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=VARCHAR}, #{loginTs,jdbcType=VARCHAR}, #{para1,jdbcType=VARCHAR}, 
+      #{para2,jdbcType=VARCHAR}, #{para3,jdbcType=VARCHAR}, #{para4,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybz.entity.UserVo" >
+    insert into user_vo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="userAvator != null" >
+        user_avator,
+      </if>
+      <if test="userMobile != null" >
+        user_mobile,
+      </if>
+      <if test="needMerge != null" >
+        need_merge,
+      </if>
+      <if test="verified != null" >
+        verified,
+      </if>
+      <if test="validateEmail != null" >
+        validate_email,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="sysId != null" >
+        sys_id,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+      <if test="userActivate != null" >
+        user_activate,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="loginTs != null" >
+        login_ts,
+      </if>
+      <if test="para1 != null" >
+        para1,
+      </if>
+      <if test="para2 != null" >
+        para2,
+      </if>
+      <if test="para3 != null" >
+        para3,
+      </if>
+      <if test="para4 != null" >
+        para4,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvator != null" >
+        #{userAvator,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="needMerge != null" >
+        #{needMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="verified != null" >
+        #{verified,jdbcType=VARCHAR},
+      </if>
+      <if test="validateEmail != null" >
+        #{validateEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sysId != null" >
+        #{sysId,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userActivate != null" >
+        #{userActivate,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTs != null" >
+        #{loginTs,jdbcType=VARCHAR},
+      </if>
+      <if test="para1 != null" >
+        #{para1,jdbcType=VARCHAR},
+      </if>
+      <if test="para2 != null" >
+        #{para2,jdbcType=VARCHAR},
+      </if>
+      <if test="para3 != null" >
+        #{para3,jdbcType=VARCHAR},
+      </if>
+      <if test="para4 != null" >
+        #{para4,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertUserVoBatch" parameterType="java.util.List">
+    insert into user_vo (id, user_id, tenant_id,
+    user_name, user_email, user_code,
+    user_avator, user_mobile, need_merge,
+    verified, validate_email, user_password,
+    sys_id, register_date, user_activate,
+    type_id, login_ts, para1,
+    para2, para3, para4,
+    source)
+    values
+    <foreach collection ="list" item="userVo" index= "index" separator =",">
+      (#{userVo.id}, #{userVo.userId}, #{userVo.tenantId},
+      #{userVo.userName}, #{userVo.userEmail}, #{userVo.userCode},
+      #{userVo.userAvator}, #{userVo.userMobile}, #{userVo.needMerge},
+      #{userVo.verified}, #{userVo.validateEmail}, #{userVo.userPassword},
+      #{userVo.sysId}, #{userVo.registerDate}, #{userVo.userActivate},
+      #{userVo.typeId}, #{userVo.loginTs}, #{userVo.para1},
+      #{userVo.para2}, #{userVo.para3}, #{userVo.para4},
+      #{userVo.source})
+    </foreach>
+  </insert>
+  <select id="countByExample" parameterType="com.ybz.entity.UserVoExample" resultType="java.lang.Integer" >
+    select count(*) from user_vo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_vo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCode != null" >
+        user_code = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAvator != null" >
+        user_avator = #{record.userAvator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null" >
+        user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needMerge != null" >
+        need_merge = #{record.needMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verified != null" >
+        verified = #{record.verified,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validateEmail != null" >
+        validate_email = #{record.validateEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysId != null" >
+        sys_id = #{record.sysId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerDate != null" >
+        register_date = #{record.registerDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userActivate != null" >
+        user_activate = #{record.userActivate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTs != null" >
+        login_ts = #{record.loginTs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.para1 != null" >
+        para1 = #{record.para1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.para2 != null" >
+        para2 = #{record.para2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.para3 != null" >
+        para3 = #{record.para3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.para4 != null" >
+        para4 = #{record.para4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_vo
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_code = #{record.userCode,jdbcType=VARCHAR},
+      user_avator = #{record.userAvator,jdbcType=VARCHAR},
+      user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      need_merge = #{record.needMerge,jdbcType=VARCHAR},
+      verified = #{record.verified,jdbcType=VARCHAR},
+      validate_email = #{record.validateEmail,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      sys_id = #{record.sysId,jdbcType=VARCHAR},
+      register_date = #{record.registerDate,jdbcType=VARCHAR},
+      user_activate = #{record.userActivate,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=VARCHAR},
+      login_ts = #{record.loginTs,jdbcType=VARCHAR},
+      para1 = #{record.para1,jdbcType=VARCHAR},
+      para2 = #{record.para2,jdbcType=VARCHAR},
+      para3 = #{record.para3,jdbcType=VARCHAR},
+      para4 = #{record.para4,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybz.entity.UserVo" >
+    update user_vo
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvator != null" >
+        user_avator = #{userAvator,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="needMerge != null" >
+        need_merge = #{needMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="verified != null" >
+        verified = #{verified,jdbcType=VARCHAR},
+      </if>
+      <if test="validateEmail != null" >
+        validate_email = #{validateEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sysId != null" >
+        sys_id = #{sysId,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userActivate != null" >
+        user_activate = #{userActivate,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTs != null" >
+        login_ts = #{loginTs,jdbcType=VARCHAR},
+      </if>
+      <if test="para1 != null" >
+        para1 = #{para1,jdbcType=VARCHAR},
+      </if>
+      <if test="para2 != null" >
+        para2 = #{para2,jdbcType=VARCHAR},
+      </if>
+      <if test="para3 != null" >
+        para3 = #{para3,jdbcType=VARCHAR},
+      </if>
+      <if test="para4 != null" >
+        para4 = #{para4,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybz.entity.UserVo" >
+    update user_vo
+    set user_id = #{userId,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      user_avator = #{userAvator,jdbcType=VARCHAR},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      need_merge = #{needMerge,jdbcType=VARCHAR},
+      verified = #{verified,jdbcType=VARCHAR},
+      validate_email = #{validateEmail,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      sys_id = #{sysId,jdbcType=VARCHAR},
+      register_date = #{registerDate,jdbcType=VARCHAR},
+      user_activate = #{userActivate,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      login_ts = #{loginTs,jdbcType=VARCHAR},
+      para1 = #{para1,jdbcType=VARCHAR},
+      para2 = #{para2,jdbcType=VARCHAR},
+      para3 = #{para3,jdbcType=VARCHAR},
+      para4 = #{para4,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
