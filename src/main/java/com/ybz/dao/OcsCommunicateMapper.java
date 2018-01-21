@@ -34,4 +34,6 @@ public interface OcsCommunicateMapper {
     int updateByPrimaryKeyWithBLOBs(OcsCommunicateWithBLOBs record);
 
     int updateByPrimaryKey(OcsCommunicate record);
+
+    Double queryMoneyByDate(OcsCommunicateExample example);
 }

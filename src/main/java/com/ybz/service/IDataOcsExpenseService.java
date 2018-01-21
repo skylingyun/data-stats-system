@@ -17,4 +17,8 @@ public interface IDataOcsExpenseService {
     int countByExample(String beginTime, String endTime);
 
     Double queryMoneyByDate(String beginTime, String endTime);
+
+    int countByCondition(String tenantId, String countBeginDate, String countEndDate);
+
+    Double queryMoneyByCondition(String tenantId, String countBeginDate, String countEndDate);
 }

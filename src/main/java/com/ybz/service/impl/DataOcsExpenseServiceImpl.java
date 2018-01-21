@@ -76,4 +76,14 @@ public class DataOcsExpenseServiceImpl implements IDataOcsExpenseService {
         }
         return nodeExpenseMoney;
     }
+
+    @Override
+    public int countByCondition(String tenantId, String countBeginDate, String countEndDate) {
+        return 0;
+    }
+
+    @Override
+    public Double queryMoneyByCondition(String tenantId, String countBeginDate, String countEndDate) {
+        return null;
+    }
 }
